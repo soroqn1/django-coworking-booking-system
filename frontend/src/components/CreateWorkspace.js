@@ -107,7 +107,7 @@ const CreateWorkspace = ({ onSuccess }) => {
         </div>
 
         <div className="form-group">
-          <label>Price per hour (₽)</label>
+          <label>Price per hour ($)</label>
           <input
             type="number"
             name="price_per_hour"

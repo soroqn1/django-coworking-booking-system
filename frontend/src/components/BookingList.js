@@ -94,8 +94,8 @@ const BookingList = () => {
                       <div>
                         📅 {formatDateTime(booking.start_time)} → {formatDateTime(booking.end_time)}
                       </div>
-                      <div style={{ marginTop: '5px', fontWeight: 'bold', color: '#007bff' }}>
-                        Total: ₽{booking.total_price}
+                      <div style={{ marginTop: '5px', fontWeight: 'bold', color: '#007bff', fontSize: '18px' }}>
+                        Total: ${booking.total_price || '0.00'}
                       </div>
                     </div>
                   </div>

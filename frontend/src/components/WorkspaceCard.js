@@ -19,7 +19,7 @@ const WorkspaceCard = ({ workspace }) => {
         <div>📍 {workspace.location}</div>
         <div style={{ marginTop: '5px' }}>👥 Capacity: {workspace.capacity}</div>
         <div style={{ marginTop: '5px', fontSize: '18px', fontWeight: 'bold', color: '#007bff' }}>
-          ₽{workspace.price_per_hour}/hour
+          ${workspace.price_per_hour}/hour
         </div>
       </div>
       <Link to={`/book/${workspace.id}`}>

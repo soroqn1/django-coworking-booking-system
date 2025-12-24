@@ -36,7 +36,7 @@ const BookingForm = () => {
     const start = new Date(formData.start_time);
     const end = new Date(formData.end_time);
     const hours = (end - start) / (1000 * 60 * 60);
-    return (hours * parseFloat(workspace.price_per_hour)).toFixed(2);
+    return hours * parseFloat(workspace.price_per_hour);
   };
 
   const handleSubmit = async (e) => {
@@ -50,11 +50,13 @@ const BookingForm = () => {
     setError(null);
     setSubmitting(true);
 
+    const totalPrice = calculatePrice();
+
     const bookingData = {
       ...formData,
       user: parseInt(formData.user),
       workspace: parseInt(workspaceId),
-      total_price: calculatePrice(),
+      total_price: totalPrice,
     };
 
     try {
@@ -84,7 +86,7 @@ const BookingForm = () => {
             <div>📍 {workspace.location}</div>
             <div style={{ marginTop: '5px' }}>👥 Capacity: {workspace.capacity}</div>
             <div style={{ marginTop: '5px', fontSize: '20px', fontWeight: 'bold', color: '#007bff' }}>
-              ₽{workspace.price_per_hour}/hour
+              ${workspace.price_per_hour}/hour
             </div>
           </div>
         </div>
@@ -141,7 +143,7 @@ const BookingForm = () => {
                 borderRadius: '5px',
                 marginBottom: '15px'
               }}>
-                <strong>Total Price: ₽{totalPrice}</strong>
+                <strong>Total Price: ${totalPrice}</strong>
               </div>
             )}
 
