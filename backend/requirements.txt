@@ -1,1 +1,3 @@
 Django
+dotenv
+psycopg2-binary
