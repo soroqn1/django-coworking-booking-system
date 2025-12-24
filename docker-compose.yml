@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/app
@@ -10,6 +12,26 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=True
-    env_file:
-      - ./backend/.env
-    network_mode: "host"
+      - DATABASE_NAME=coworking_db
+      - DATABASE_USER=coworking_user
+      - DATABASE_PASSWORD=SecurePassword123
+      - DATABASE_HOST=host.docker.internal
+      - DATABASE_PORT=5432
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
